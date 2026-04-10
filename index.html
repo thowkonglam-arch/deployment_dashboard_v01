@@ -283,7 +283,7 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:linear-gradient(90deg,#fb8c00,#e65100);display:inline-block"></span>At Risk</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:#cfd8dc;border:1px solid #b0bec5;display:inline-block"></span>Not Started</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:2px;height:14px;background:var(--today-col);display:inline-block;margin:0 4px"></span><span style="color:var(--today-col);font-weight:600">Today (10 Apr)</span></span>
-    <span style="display:flex;align-items:center;gap:5px"><span style="color:#1565c0;font-size:13px">✔</span>Completed task</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:20px;height:8px;border-radius:2px;background:linear-gradient(90deg,#0288d1,#01579b);display:inline-flex;align-items:center;justify-content:flex-end;padding-right:2px;"><span style="color:rgba(255,255,255,0.95);font-size:7px;font-weight:900;line-height:1;">✔</span></span>Completed task</span>
     <span style="margin-left:6px">▶ Click category / sub-menu to expand · Hover bars for details</span>
   </div>
   <div class="gw"><div id="gc" class="gc"></div></div>
@@ -374,7 +374,7 @@ const tasks=[
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"OSM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"UIM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 2 pending user to test after Go-live",p:100},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Web user verification",                  r:"Green",     S:"2026-03-19",E:"2026-04-13",st:"96% complete",rm:"Requested 4 pending users to close testing by Mon 13-Apr",p:96},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Mobile App user verification",           r:"Not started",S:"2026-04-10",E:"2026-04-17",st:"0% — SSO resolved",rm:"Accruent Mobile App SSO login issue resolved, 294 contractor onboarding to CyberArk completed",p:0},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Mobile App user verification",           r:"Amber",S:"2026-04-10",E:"2026-04-17",st:"0% — SSO resolved; date revised to 17-Apr",rm:"Accruent Mobile App SSO login issue resolved, 294 contractor onboarding to CyberArk completed. Date has been revised to 17-Apr",p:0},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"iValua App user verification",                   r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Helix App user verification",                    r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"IRD (plus Qlik) App user verification",          r:"Green",     S:"2026-03-19",E:"2026-04-14",st:"30% complete",rm:"User configuration completed, verification in progress",p:30},
@@ -445,7 +445,7 @@ function pctGrad(pct){
                  "linear-gradient(90deg,#f0f4c3,#dce775)";
 }
 function pctCol(pct){
-  return pct>=80?"#2e7d32":pct>=50?"#558b2f":pct>=20?"#827717":"#9e9d24";
+  return pct>=80?"#2e7d32":pct>=50?"#1a5c28":"#1a2840";
 }
 
 function grp(){
@@ -499,7 +499,7 @@ function buildGantt(){
     h+=`<div class="g-grp" onclick="tgGrp('gm${mi}','gmc${mi}')">
       <div class="g-grp-lbl" style="border-left:3px solid ${col}">
         <span class="g-chev" id="gmc${mi}">▶</span>${menu}
-        <span class="g-grp-pct" style="color:${pc};background:${pctGrad(pct)};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${pct}%</span>
+        <span class="g-grp-pct" style="color:${pc};font-weight:700;">${pct}%</span>
       </div>
       <div class="g-bar-area"><div class="today-line" style="left:${todayX}%"></div></div>
     </div>
@@ -523,11 +523,11 @@ function buildGantt(){
         const isDone=t.r==="Completed";
         const enc=encodeURIComponent(JSON.stringify({a:t.a,S:t.S,E:t.E,r:t.r,st:t.st,rm:t.rm,p:t.p}));
         h+=`<div class="g-row">
-          <div class="g-row-lbl">${isDone?'<span class="g-done-tick">✔</span>':''}<span>${t.a}</span></div>
+          <div class="g-row-lbl"><span>${t.a}</span></div>
           <div class="g-bar-area">
             <div class="today-line" style="left:${todayX}%"></div>
-            <div class="g-bar ${cls}" style="left:${bx}%;width:${bw}%;top:50%;transform:translateY(-50%)"
-              data-d="${enc}" onmouseenter="sT(event,this)" onmousemove="mT(event)" onmouseleave="hT()"></div>
+            <div class="g-bar ${cls}" style="left:${bx}%;width:${bw}%;top:50%;transform:translateY(-50%);position:relative;overflow:hidden;"
+              data-d="${enc}" onmouseenter="sT(event,this)" onmousemove="mT(event)" onmouseleave="hT()">${isDone?'<span style="position:absolute;right:3px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.95);font-size:9px;font-weight:900;pointer-events:none;line-height:1;">✔</span>':''}</div>
           </div>
         </div>`;
       });
@@ -724,7 +724,7 @@ function buildExec(){
   </div>`;
 
   document.getElementById("exec").innerHTML=`
-    <div class="stitle">Executive Summary — CIO / CEO / Project Director View</div>
+    <div class="stitle">Executive Summary</div>
     <div class="ex-grid">
       <div class="kpi"><div class="kpi-ico b">📊</div><div>
         <div class="kpi-v" style="color:var(--nlt-accent)">${allPct}%</div>
