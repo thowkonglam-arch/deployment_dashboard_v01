@@ -3,28 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NLT Deployment Dashboard — Status 8 Apr 2026</title>
+<title>Apollo Phase 2.0 Deployment Dashboard — 10 Apr 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-page:    #eef2f7;
-  --bg-card:    #ffffff;
-  --bg-card2:   #f7fafc;
-  --border:     #d0dae8;
-  --border-med: #b4c4d8;
-  --text-pri:   #1a2840;
-  --text-sec:   #4a6080;
-  --text-muted: #8aa0bb;
-  --nlt-dark:   #0a3d6e;
-  --nlt-blue:   #0d5cb8;
-  --nlt-accent: #0288d1;
-  --green:      #2e7d32;
-  --amber:      #e65100;
-  --red:        #c62828;
-  --today:      #d32f2f;
-  --font-d: 'Rajdhani', sans-serif;
-  --font-b: 'Inter', sans-serif;
-  --font-m: 'JetBrains Mono', monospace;
+  --bg-page:   #eef2f7;
+  --bg-card:   #ffffff;
+  --bg-card2:  #f7fafc;
+  --border:    #d0dae8;
+  --border-med:#b4c4d8;
+  --text-pri:  #1a2840;
+  --text-sec:  #4a6080;
+  --text-muted:#8aa0bb;
+  --nlt-dark:  #0a3d6e;
+  --nlt-blue:  #0d5cb8;
+  --nlt-accent:#0288d1;
+  --green-today:#2e7d32;
+  --amber:     #e65100;
+  --red:       #c62828;
+  --today-col: #2e7d32;
+  --font-d:'Rajdhani',sans-serif;
+  --font-b:'Inter',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);min-height:100vh}
@@ -34,13 +34,12 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
   position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
   height:64px;box-shadow:0 2px 10px rgba(2,136,209,.12)}
 .hdr-brand{display:flex;align-items:center;gap:14px}
-.hdr-logo{width:40px;height:40px;background:linear-gradient(135deg,var(--nlt-accent),var(--nlt-dark));
+.hdr-logo{width:42px;height:42px;background:linear-gradient(135deg,#1565c0,#0a3d6e);
   border-radius:9px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-d);font-weight:700;font-size:16px;color:#fff;
-  box-shadow:0 2px 8px rgba(2,136,209,.35)}
-.hdr-title{font-family:var(--font-d);font-size:22px;font-weight:700;color:var(--nlt-dark);letter-spacing:.4px}
+  font-family:var(--font-d);font-weight:700;font-size:13px;color:#fff;letter-spacing:.5px;
+  box-shadow:0 2px 8px rgba(13,92,184,.35);flex-shrink:0}
+.hdr-title{font-family:var(--font-d);font-size:21px;font-weight:700;color:var(--nlt-dark);letter-spacing:.3px}
 .hdr-title span{color:var(--nlt-accent)}
-.hdr-sub{font-size:11px;color:var(--text-muted);letter-spacing:1.2px;text-transform:uppercase;margin-top:1px}
 .hdr-meta{display:flex;align-items:center;gap:14px}
 .hdr-date{font-family:var(--font-m);font-size:12px;color:var(--nlt-accent);
   background:#e1f5fe;border:1px solid #81d4fa;padding:6px 12px;border-radius:6px;font-weight:500}
@@ -75,41 +74,51 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .rc{background:#e1f5fe;color:#01579b;border:1px solid #81d4fa}
 .rn{background:#f5f7f9;color:#607d8b;border:1px solid #cfd8dc}
 
-/* ════════════════════════════════════
-   TAB 0 — GANTT
-════════════════════════════════════ */
+/* pct color helper */
+.pc-hi{color:#2e7d32;font-weight:700}
+.pc-mid{color:#558b2f;font-weight:700}
+.pc-lo{color:#827717;font-weight:700}
+
+/* ════════════════════════════════
+   GANTT
+════════════════════════════════ */
 .gw{overflow-x:auto;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
 .gc{min-width:1060px}
 
-/* Header row */
-.g-hdr{display:grid;grid-template-columns:310px 1fr;background:var(--nlt-dark);border-radius:10px 10px 0 0}
+/* Header */
+.g-hdr{display:grid;grid-template-columns:300px 1fr;background:var(--nlt-dark);border-radius:10px 10px 0 0}
 .g-hdr-lbl{padding:10px 16px;font-family:var(--font-d);font-size:12px;font-weight:700;
   color:#fff;letter-spacing:1px;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.15)}
 .g-hdr-dates{display:flex;position:relative}
+
+/* Every date tick gets a number — month starts bold, weekends shaded */
 .g-dtick{flex:1;text-align:center;font-family:var(--font-m);font-size:9px;
-  color:rgba(255,255,255,.45);padding:4px 1px 5px;border-right:1px solid rgba(255,255,255,.06);line-height:1.4}
-.g-dtick.ms{color:rgba(255,255,255,.9);font-weight:700;font-size:10px;border-left:1px solid rgba(255,255,255,.2)}
-.g-dtick.we{background:rgba(0,0,0,.18)}
+  color:rgba(255,255,255,.5);padding:3px 1px 4px;border-right:1px solid rgba(255,255,255,.06);
+  line-height:1.3;min-width:0}
+.g-dtick.ms{color:#fff;font-weight:700;font-size:10px;border-left:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06)}
+.g-dtick.we{background:rgba(0,0,0,.2)}
+
+/* TODAY label — GREEN */
 .today-lbl{position:absolute;top:0;transform:translateX(-50%);
-  background:var(--today);color:#fff;font-family:var(--font-m);font-size:9px;font-weight:700;
+  background:var(--today-col);color:#fff;font-family:var(--font-m);font-size:9px;font-weight:700;
   padding:2px 5px;border-radius:3px;white-space:nowrap;z-index:10;pointer-events:none}
 
 .g-body{border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;background:#fff}
 
-/* Group row */
-.g-grp{display:grid;grid-template-columns:310px 1fr;
+/* Group row (key menu) */
+.g-grp{display:grid;grid-template-columns:300px 1fr;
   background:linear-gradient(90deg,#ddeaf8,#e8f3fb);
   border-bottom:1px solid var(--border-med);cursor:pointer;user-select:none;transition:background .14s}
 .g-grp:hover{background:linear-gradient(90deg,#cce0f4,#daeaf6)}
 .g-grp-lbl{padding:9px 14px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border);
   font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--nlt-dark);
   text-transform:uppercase;letter-spacing:.5px}
-.g-chevron{font-size:10px;color:var(--nlt-accent);transition:transform .2s;margin-right:2px}
-.g-chevron.op{transform:rotate(90deg)}
-.g-grp-pct{margin-left:auto;font-family:var(--font-m);font-size:11px;font-weight:700}
+.g-chev{font-size:10px;color:var(--nlt-accent);transition:transform .2s;flex-shrink:0}
+.g-chev.op{transform:rotate(90deg)}
+.g-grp-pct{margin-left:auto;font-family:var(--font-m);font-size:12px;font-weight:700}
 
-/* Sub row */
-.g-sub{display:grid;grid-template-columns:310px 1fr;
+/* Sub-menu row */
+.g-sub{display:grid;grid-template-columns:300px 1fr;
   background:#f4f8fc;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;user-select:none;transition:background .13s}
 .g-sub:hover{background:#e8f2fb}
 .g-sub-lbl{padding:7px 14px 7px 26px;display:flex;align-items:center;gap:7px;border-right:1px solid var(--border);
@@ -117,32 +126,34 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .g-sub-pct{margin-left:auto;font-family:var(--font-m);font-size:10px;font-weight:700}
 
 /* Activity row */
-.g-row{display:grid;grid-template-columns:310px 1fr;border-bottom:1px solid rgba(0,0,0,.033);
+.g-row{display:grid;grid-template-columns:300px 1fr;border-bottom:1px solid rgba(0,0,0,.033);
   transition:background .12s;background:#fff}
 .g-row:hover{background:#e1f5fe}
 .g-row-lbl{padding:5px 14px 5px 42px;font-size:11px;color:var(--text-pri);
-  border-right:1px solid var(--border);display:flex;align-items:center;overflow:hidden}
-.g-row-lbl span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  border-right:1px solid var(--border);display:flex;align-items:center;gap:6px;overflow:hidden}
+.g-row-lbl span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.g-done-tick{color:#1565c0;font-size:12px;flex-shrink:0;line-height:1}
+
 .g-bar-area{position:relative;min-height:29px;display:flex;align-items:center}
 
-/* Today line - FIXED: uses a proper visible red rule with dot */
-.today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--today);z-index:5;pointer-events:none}
+/* TODAY LINE — GREEN */
+.today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--today-col);z-index:5;pointer-events:none}
 .today-line::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:6px;height:6px;border-radius:50%;background:var(--today)}
+  width:7px;height:7px;border-radius:50%;background:var(--today-col)}
 
 /* Bars */
 .g-bar{position:absolute;height:14px;border-radius:3px;cursor:pointer;transition:filter .14s,box-shadow .14s}
-.g-bar:hover{filter:brightness(.85);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:4}
-.g-bar.completed{background:linear-gradient(90deg,#0288d1,#01579b)}
-.g-bar.green    {background:linear-gradient(90deg,#43a047,#2e7d32)}
-.g-bar.amber    {background:linear-gradient(90deg,#fb8c00,#e65100)}
+.g-bar:hover{filter:brightness(.83);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:4}
+.g-bar.completed  {background:linear-gradient(90deg,#0288d1,#01579b)}
+.g-bar.green      {background:linear-gradient(90deg,#43a047,#2e7d32)}
+.g-bar.amber      {background:linear-gradient(90deg,#fb8c00,#e65100)}
 .g-bar.not-started{background:#cfd8dc;border:1px solid #b0bec5}
 
 .g-divider{height:3px;background:linear-gradient(90deg,var(--nlt-dark),var(--nlt-accent));opacity:.18}
 
-/* ════════════════════════════════════
-   TAB 1 — OPERATIONAL DASHBOARD
-════════════════════════════════════ */
+/* ════════════════════════════════
+   OPERATIONAL DASHBOARD
+════════════════════════════════ */
 .ops-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;
   box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .ops-key{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;
@@ -157,7 +168,6 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .ops-pp{font-family:var(--font-m);font-size:12px;font-weight:700;min-width:38px;text-align:right}
 .ops-chev{color:var(--text-muted);transition:transform .2s;font-size:12px}
 .ops-chev.op{transform:rotate(180deg)}
-
 .ops-sm{display:none}.ops-sm.op{display:block}
 .ops-sk{display:flex;align-items:center;justify-content:space-between;
   padding:9px 20px 9px 42px;background:#f7fafc;border-bottom:1px solid rgba(0,0,0,.04);
@@ -165,7 +175,6 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .ops-sk:hover{background:#eef4fb}
 .ops-sk-lbl{font-size:12px;font-weight:600;color:var(--text-sec);text-transform:uppercase;letter-spacing:.4px}
 .ops-act{display:none}.ops-act.op{display:block}
-
 .ops-tbl{width:100%;border-collapse:collapse}
 .ops-tbl th{padding:7px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text-muted);
   text-transform:uppercase;letter-spacing:.7px;background:#f0f4f8;border-bottom:1px solid var(--border)}
@@ -177,9 +186,9 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .ops-tbl td.sc{font-size:11px;color:var(--text-sec);max-width:160px}
 .ops-tbl td.rc{font-size:11px;color:var(--text-sec);max-width:240px;line-height:1.5}
 
-/* ════════════════════════════════════
-   TAB 2 — EXECUTIVE
-════════════════════════════════════ */
+/* ════════════════════════════════
+   EXECUTIVE DASHBOARD
+════════════════════════════════ */
 .ex-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:22px}
 .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;
   display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
@@ -197,7 +206,6 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .h-ring svg{transform:rotate(-90deg)}
 .h-ring-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-family:var(--font-m);font-size:13px;font-weight:700}
-
 .ex-sec{margin-bottom:22px}
 .ex-sec-t{font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.7px;color:var(--nlt-dark);
   margin-bottom:11px;display:flex;align-items:center;gap:8px;text-transform:uppercase;
@@ -210,20 +218,18 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .iss-m{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
 .iss-tag{font-size:10px;font-family:var(--font-m);padding:2px 7px;border-radius:4px;
   background:#e1f5fe;color:var(--nlt-accent);border:1px solid #81d4fa}
-
 .up-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .up-item{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:11px 13px}
 .up-date{font-family:var(--font-m);font-size:11px;color:var(--nlt-accent);margin-bottom:3px;font-weight:600}
 .up-title{font-size:12px;font-weight:600;color:var(--text-pri);margin-bottom:2px}
 .up-owner{font-size:10px;color:var(--text-muted)}
-
 .tl{position:relative;padding:8px 0 8px 28px}
 .tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;
   background:linear-gradient(180deg,var(--nlt-accent),var(--nlt-dark));opacity:.28}
 .tl-item{position:relative;margin-bottom:14px}
 .tl-dot{position:absolute;left:-25px;top:3px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg-page)}
 .tl-dot.past{background:var(--nlt-accent)}
-.tl-dot.today{background:var(--red);box-shadow:0 0 6px rgba(198,40,40,.5)}
+.tl-dot.today{background:#2e7d32;box-shadow:0 0 6px rgba(46,125,50,.5)}
 .tl-dot.future{background:#90a4ae}
 .tl-dot.active{background:var(--amber);box-shadow:0 0 6px rgba(230,81,0,.4)}
 .tl-date{font-family:var(--font-m);font-size:11px;color:var(--nlt-accent);font-weight:600}
@@ -232,7 +238,7 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 
 /* TOOLTIP */
 .tip{display:none;position:fixed;background:#fff;border:1px solid var(--border-med);
-  border-radius:10px;padding:13px 16px;z-index:400;min-width:240px;max-width:340px;
+  border-radius:10px;padding:13px 16px;z-index:400;min-width:250px;max-width:360px;
   box-shadow:0 8px 28px rgba(0,0,0,.14);pointer-events:none;border-top:3px solid var(--nlt-accent)}
 .tip.on{display:block}
 .tip-title{font-weight:700;font-size:12px;color:var(--text-pri);margin-bottom:8px;line-height:1.4}
@@ -242,7 +248,6 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 .tip-status{font-size:11px;color:var(--text-sec);margin-top:7px;padding-top:7px;
   border-top:1px solid var(--border);line-height:1.5}
 
-/* scrollbar */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--bg-page)}
 ::-webkit-scrollbar-thumb{background:#b0c4d8;border-radius:3px}
@@ -253,14 +258,13 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 
 <header class="hdr">
   <div class="hdr-brand">
-    <div class="hdr-logo">NLT</div>
+    <div class="hdr-logo">APL</div>
     <div>
-      <div class="hdr-title">Net<span>Link</span> Trust — Deployment Dashboard</div>
-      <div class="hdr-sub">Fibre Network · Broadband Infrastructure · Singapore</div>
+      <div class="hdr-title"><span>Apollo</span> Phase 2.0 Deployment Dashboard</div>
     </div>
   </div>
   <div class="hdr-meta">
-    <div class="hdr-date">📅 Status: 8 Apr 2026</div>
+    <div class="hdr-date">📅 Status: 10 Apr 2026</div>
     <div class="hdr-badge">🚀 Go-Live: 29 Apr 2026</div>
   </div>
 </header>
@@ -278,8 +282,9 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:linear-gradient(90deg,#43a047,#2e7d32);display:inline-block"></span>On Track</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:linear-gradient(90deg,#fb8c00,#e65100);display:inline-block"></span>At Risk</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:#cfd8dc;border:1px solid #b0bec5;display:inline-block"></span>Not Started</span>
-    <span style="display:flex;align-items:center;gap:5px"><span style="width:2px;height:14px;background:var(--today);display:inline-block;margin:0 4px"></span>Today (8 Apr)</span>
-    <span style="margin-left:6px">▶ Click category/sub-menu to expand · Hover bars for details</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:2px;height:14px;background:var(--today-col);display:inline-block;margin:0 4px"></span><span style="color:var(--today-col);font-weight:600">Today (10 Apr)</span></span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="color:#1565c0;font-size:13px">✔</span>Completed task</span>
+    <span style="margin-left:6px">▶ Click category / sub-menu to expand · Hover bars for details</span>
   </div>
   <div class="gw"><div id="gc" class="gc"></div></div>
 </div>
@@ -296,98 +301,131 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 <div class="tip" id="tip"></div>
 
 <script>
-// ══════ DATA ══════
+// ════════════════════════════════════════
+// DATA — 10 Apr 2026
+// p = numeric completion 0-100
+// excludeSAKT flag so Training % only uses EUT
+// ════════════════════════════════════════
 const tasks=[
- {o:"Jenney", m:"Training",       s:"End User Training (EUT)",       a:"End User Training (EUT)",                        r:"Green",      S:"2026-03-23",E:"2026-04-24",st:"EUT in progress",       rm:"EUT-SPL: 2 SOM EO & 2 GIS modules. Completion Rate as of 6-Apr: 91.4%",  p:91.4},
- {o:"Jenney", m:"Training",       s:"System Admin KT (SAKT)",        a:"System Administrators KT (SAKT)",                r:"Not started",S:"2026-05-05",E:"2026-05-06",st:"Not started",            rm:"SAKT-ILT: 3 WFM modules on 5–6 May 2026."},
- {o:"P&A",    m:"Comms",          s:"Go-Live Comms (NLT Org-Wide)",  a:"Comms #1",                                       r:"Completed",  S:"2026-03-30",E:"2026-04-02",st:"Completed",              rm:""},
- {o:"P&A",    m:"Comms",          s:"Go-Live Comms (NLT Org-Wide)",  a:"Comms #2",                                       r:"Green",      S:"2026-04-13",E:"2026-04-17",st:"Review in progress",     rm:""},
- {o:"P&A",    m:"Comms",          s:"Go-Live Comms (NLT Org-Wide)",  a:"Comms #3",                                       r:"Green",      S:"2026-04-27",E:"2026-05-01",st:"Dev in progress",        rm:""},
- {o:"P&A",    m:"Comms",          s:"Go-Live Comms (NLT Org-Wide)",  a:"Go-Live Announcement",                           r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"SWP",                                            r:"Green",      S:"2026-04-01",E:"2026-04-10",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"NCE Portal",                                     r:"Completed",  S:"2026-04-01",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"FRC Portal",                                     r:"Green",      S:"2026-04-01",E:"2026-04-10",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"PRP",                                            r:"Green",      S:"2026-04-01",E:"2026-04-13",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"Public Portal (Coverage Check)",                 r:"Green",      S:"2026-04-01",E:"2026-04-10",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Comms",          s:"External Portal Banner",        a:"End User Portal",                                r:"Green",      S:"2026-04-01",E:"2026-04-10",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #1",                             r:"Completed",  S:"2026-03-13",E:"2026-03-13",st:"Completed",              rm:"Appointment slots blocking"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #2",                             r:"Completed",  S:"2026-04-03",E:"2026-04-03",st:"Completed",              rm:"Cutover/Switchover Calendar"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #3",                             r:"Green",      S:"2026-04-09",E:"2026-04-09",st:"Pending NLT review",     rm:"Maintenance Window Calendar E1 & E2"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #4",                             r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",            rm:"Reminder on Maintenance Window Calendar E2"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #5",                             r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",            rm:"Cutover/Switchover start at 23:00"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #6",                             r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",            rm:"Go Ahead for Cutover/Switchover"},
- {o:"P&A",    m:"Comms",          s:"RL & IMDA Comms",               a:"RL & IMDA Comms #7: Go-Live",                   r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"P&A",    m:"Comms",          s:"Contractors Comms",             a:"Contractors Comms",                              r:"Green",      S:"2026-04-01",E:"2026-04-29",st:"1st comms sent 6-Apr",   rm:"Upcoming comms date alignment scheduled on 10-Apr-2026."},
- {o:"P&A",    m:"Comms",          s:"Retained Systems Comms",        a:"Retained System Comms #1",                       r:"Completed",  S:"2026-03-30",E:"2026-03-30",st:"Completed",              rm:"Apollo Cutover Plan"},
- {o:"P&A",    m:"Comms",          s:"Retained Systems Comms",        a:"Retained Systems Comms #2",                      r:"Green",      S:"2026-04-10",E:"2026-04-10",st:"Planned",                rm:"2 weeks notice – Commencement of E1"},
- {o:"P&A",    m:"Comms",          s:"Retained Systems Comms",        a:"Retained Systems Comms #3",                      r:"Green",      S:"2026-04-22",E:"2026-04-22",st:"Planned",                rm:"Commencement of E2"},
- {o:"P&A",    m:"Comms",          s:"Retained Systems Comms",        a:"Retained Systems Comms #4",                      r:"Green",      S:"2026-04-28",E:"2026-04-28",st:"Planned",                rm:"Cutover/Switchover start at 23:00"},
- {o:"P&A",    m:"Comms",          s:"Retained Systems Comms",        a:"Retained Systems Comms #5: Go-Live",             r:"Green",      S:"2026-04-29",E:"2026-04-29",st:"Planned",                rm:""},
- {o:"P&A",    m:"Comms",          s:"Deployment Team Comms",         a:"Heads-up to NLT PICs on user access",           r:"Completed",  S:"2026-03-25",E:"2026-03-25",st:"Completed",              rm:""},
- {o:"P&A",    m:"Comms",          s:"Deployment Team Comms",         a:"App specific comms to NLT PICs",                r:"Completed",  S:"2026-04-01",E:"2026-04-01",st:"Completed",              rm:""},
- {o:"P&A",    m:"Comms",          s:"Deployment Team Comms",         a:"Heads up for E1 User Verifications",            r:"Green",      S:"2026-04-09",E:"2026-04-09",st:"Planned",                rm:""},
- {o:"P&A",    m:"Comms",          s:"Deployment Team Comms",         a:"Heads up for E2 User Verifications",            r:"Green",      S:"2026-04-20",E:"2026-04-20",st:"Planned",                rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"OSM App clean-up & deployment",                 r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"UIM App clean-up & deployment",                 r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"vxField App clean-up & deployment",             r:"Amber",      S:"2026-03-19",E:"2026-04-07",st:"Issue",                  rm:"⚠ Accruent Mobile App SSO login issue"},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"iValua App clean-up & deployment",              r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"Helix App clean-up & deployment",               r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"IRD (plus Qlik) App clean-up",                  r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"OSB App clean-up & deployment",                 r:"Green",      S:"2026-03-19",E:"2026-03-31",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"B2B Gateway App clean-up",                      r:"Completed",  S:"2026-03-19",E:"2026-03-31",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"SWP App clean-up & deployment",                 r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"Internal Portal App clean-up",                  r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"External Portal App clean-up",                  r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"BRE App clean-up & deployment",                 r:"Completed",  S:"2026-03-19",E:"2026-03-30",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"DMS App clean-up & deployment",                 r:"Completed",  S:"2026-03-19",E:"2026-03-30",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"SVZ App clean-up & deployment",                 r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"AWS SFTP App clean-up",                         r:"Completed",  S:"2026-03-20",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App clean-up & deployment",     a:"Splunk App clean-up",                           r:"Completed",  S:"2026-03-20",E:"2026-03-31",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"OSM User role matrix",                          r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"UIM User role matrix",                          r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"vxField User role matrix",                      r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"iValua User role matrix",                       r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"Helix User role matrix",                        r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"IRD (plus Qlik) User role matrix",              r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"OSB User role matrix",                          r:"Completed",  S:"2026-03-19",E:"2026-03-31",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"B2B Gateway User role matrix",                  r:"Completed",  S:"2026-03-19",E:"2026-03-31",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"SWP User role matrix",                          r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"Internal Portal User role matrix",              r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"External Portal User role matrix",              r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"BRE / DMS / SVZ User role matrix",              r:"Completed",  S:"2026-03-19",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"User role matrix confirmation", a:"AWS SFTP / Splunk User role matrix",            r:"Completed",  S:"2026-03-20",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"OSM App user verification",                     r:"Green",      S:"2026-03-19",E:"2026-04-07",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"UIM App user verification",                     r:"Green",      S:"2026-03-19",E:"2026-04-07",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"vxField App user verification",                 r:"Amber",      S:"2026-03-19",E:"2026-04-17",st:"Issue",                  rm:"⚠ Accruent Mobile App SSO login issue"},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"iValua App user verification",                  r:"Green",      S:"2026-03-23",E:"2026-04-07",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"Helix App user verification",                   r:"Completed",  S:"2026-03-23",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"IRD (plus Qlik) App user verification",         r:"Green",      S:"2026-03-19",E:"2026-04-07",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"OSB / B2B Gateway App verification",            r:"Completed",  S:"2026-03-19",E:"2026-03-31",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"SWP / Internal / External Portal",              r:"Green",      S:"2026-03-19",E:"2026-04-07",st:"In Progress",            rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"BRE / DMS App user verification",               r:"Completed",  S:"2026-03-19",E:"2026-03-30",st:"Completed",              rm:""},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"SVZ App user verification",                     r:"Amber",      S:"2026-03-23",E:"2026-04-07",st:"Needs extension to 9-Apr",rm:"⚠ Requires additional time until 9-Apr to complete"},
- {o:"P&A",    m:"Prod Env Setup", s:"App user verification",         a:"AWS SFTP / Splunk App verification",            r:"Completed",  S:"2026-03-20",E:"2026-04-07",st:"Completed",              rm:""},
- {o:"Inam",   m:"Data Migration", s:"E1 migration",                  a:"E1 Extraction",                                 r:"Not started",S:"2026-04-10",E:"2026-04-11",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E1 migration",                  a:"E1 Non-GIS & Reconciliation",                   r:"Not started",S:"2026-04-11",E:"2026-04-16",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E1 migration",                  a:"E1 GIS & Reconciliation",                       r:"Not started",S:"2026-04-11",E:"2026-04-17",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: Extraction & Restoration",                  r:"Not started",S:"2026-04-22",E:"2026-04-23",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: Non-GIS Migration",                         r:"Not started",S:"2026-04-23",E:"2026-04-25",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: GIS Migration",                             r:"Not started",S:"2026-04-23",E:"2026-04-26",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: Additional Attributes",                     r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: Inflight EO RPA",                           r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"CE1 Extraction – Incidents & catchup",          r:"Not started",S:"2026-04-25",E:"2026-04-26",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"Incident Migration",                            r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"E2: Inflight SO & CE1 Order Catchup",           r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"CE2 Extraction – Catchup Orders",               r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"CE2 Order Catchup for Sun/Mon",                 r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"Manual Incidents",                              r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"CE3 Extraction – Catchup Orders Tue",           r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"CE3 Order Catchup for Tue",                     r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",            rm:""},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"Go No Go meeting – Checkpoint PONR",            r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",            rm:"Critical Decision Gate"},
- {o:"Inam",   m:"Data Migration", s:"E2 migration",                  a:"Post RL switch – Go-Live",                      r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",            rm:"FINAL MILESTONE"},
+ // ── TRAINING ──
+ {o:"Jenney",m:"Training",s:"End User Training (EUT)",        a:"End User Training (EUT)",                          r:"Green",     S:"2026-03-23",E:"2026-04-24",st:"96.1% completion rate as of 10-Apr",  rm:"EUT-SPL: 2 SOM EO & 2 GIS modules. EUT-ILT: 9 GIS modules 9-Apr–24-Apr.", p:96.1, inTraining:true},
+ {o:"Jenney",m:"Training",s:"System Admin KT (SAKT)",         a:"System Administrators Knowledge Transfer (SAKT)",  r:"Not started",S:"2026-05-05",E:"2026-05-06",st:"Post-go-live. Not started",          rm:"SAKT-ILT: 3 WFM modules on 5–6 May 2026.", p:0, excludeFromTrainingPct:true},
+ // ── COMMS ──
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #1",                                         r:"Completed", S:"2026-03-30",E:"2026-04-02",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #2",                                         r:"Green",     S:"2026-04-13",E:"2026-04-17",st:"Review in progress",                  rm:"",p:30},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #3",                                         r:"Green",     S:"2026-04-27",E:"2026-05-01",st:"Dev in progress",                     rm:"",p:10},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Go-Live Announcement",                             r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",                        rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"SWP",                                              r:"Completed", S:"2026-04-01",E:"2026-04-10",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"NCE Portal",                                       r:"Completed", S:"2026-04-01",E:"2026-04-07",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"FRC Portal",                                       r:"Completed", S:"2026-04-01",E:"2026-04-10",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"PRP",                                              r:"Green",     S:"2026-04-01",E:"2026-04-13",st:"Planned",                             rm:"",p:50},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"Public Portal (Coverage Check)",                   r:"Green",     S:"2026-04-01",E:"2026-04-10",st:"Planned",                             rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"End User Portal",                                  r:"Green",     S:"2026-04-01",E:"2026-04-10",st:"Planned",                             rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #1",                               r:"Completed", S:"2026-03-13",E:"2026-03-13",st:"Completed",                           rm:"Appointment slots blocking",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #2",                               r:"Completed", S:"2026-04-03",E:"2026-04-03",st:"Completed",                           rm:"Cutover/Switchover Calendar",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #3",                               r:"Completed", S:"2026-04-09",E:"2026-04-09",st:"Completed",                           rm:"Maintenance Window Calendar E1 & E2. Pending NLT review.",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #4",                               r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",                       rm:"Reminder on Maintenance Window Calendar E2",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #5",                               r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",                       rm:"Cutover/Switchover start at 23:00",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #6",                               r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",                       rm:"Go Ahead for Cutover/Switchover",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #7: Go-Live",                      r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",                       rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",                    a:"Contractors Comms",                                r:"Green",     S:"2026-04-01",E:"2026-04-29",st:"1st comms sent 6-Apr",                rm:"Upcoming comms date alignment scheduled on 10-Apr-2026.",p:30},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained System Comms #1",                         r:"Completed", S:"2026-03-30",E:"2026-03-30",st:"Completed",                           rm:"Apollo Cutover Plan",p:100},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #2",                        r:"Completed", S:"2026-04-10",E:"2026-04-10",st:"Completed",                           rm:"2 weeks notice – Commencement of E1",p:100},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #3",                        r:"Green",     S:"2026-04-22",E:"2026-04-22",st:"Planned",                             rm:"Commencement of E2",p:0},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #4",                        r:"Green",     S:"2026-04-28",E:"2026-04-28",st:"Planned",                             rm:"Cutover/Switchover start at 23:00",p:0},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #5: Go-Live",               r:"Green",     S:"2026-04-29",E:"2026-04-29",st:"Planned",                             rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads-up to NLT PICs on user access",              r:"Completed", S:"2026-03-25",E:"2026-03-25",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"App specific comms to NLT PICs",                   r:"Completed", S:"2026-04-01",E:"2026-04-01",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads up for E1 User Verifications",               r:"Completed", S:"2026-04-09",E:"2026-04-09",st:"Completed",                           rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads up for E2 User Verifications",               r:"Green",     S:"2026-04-20",E:"2026-04-20",st:"Planned",                             rm:"",p:0},
+ // ── PROD ENV SETUP ──
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"OSM App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"UIM App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"vxField App clean-up & deployment",               r:"Completed", S:"2026-03-19",E:"2026-04-17",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"iValua App clean-up & deployment",                r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Helix App clean-up & deployment",                 r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"IRD (plus Qlik) App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-14",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"OSB App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"B2B Gateway App clean-up & deployment",           r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"SWP App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Internal Portal App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"External Portal App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"BRE App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"DMS App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"SVZ App clean-up & deployment",                   r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"AWS SFTP App clean-up & deployment",              r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Splunk App clean-up & deployment",                r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSM User role matrix confirmation",              r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"UIM User role matrix confirmation",              r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"vxField User role matrix confirmation",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"iValua User role matrix confirmation",           r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Helix User role matrix confirmation",            r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"IRD (plus Qlik) User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSB User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"B2B Gateway User role matrix confirmation",     r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SWP User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Internal Portal User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"External Portal User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"BRE User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"DMS User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SVZ User role matrix confirmation",             r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"AWS SFTP User role matrix confirmation",        r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Splunk User role matrix confirmation",          r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"OSM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"UIM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 2 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Web user verification",                  r:"Green",     S:"2026-03-19",E:"2026-04-13",st:"96% complete",rm:"Requested 4 pending users to close testing by Mon 13-Apr",p:96},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Mobile App user verification",           r:"Not started",S:"2026-04-10",E:"2026-04-17",st:"0% — SSO resolved",rm:"Accruent Mobile App SSO login issue resolved, 294 contractor onboarding to CyberArk completed",p:0},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"iValua App user verification",                   r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Helix App user verification",                    r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"IRD (plus Qlik) App user verification",          r:"Green",     S:"2026-03-19",E:"2026-04-14",st:"30% complete",rm:"User configuration completed, verification in progress",p:30},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"OSB App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"B2B Gateway App user verification",              r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"SWP App user verification",                      r:"Green",     S:"2026-03-19",E:"2026-04-17",st:"91% complete",rm:"NLT user verification completed, RL testing in progress",p:91},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Internal Portal App user verification",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"External Portal App user verification",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"BRE App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"DMS App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"SVZ App user verification",                      r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"AWS SFTP App user verification",                 r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Splunk App user verification",                   r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ // ── DATA MIGRATION ──
+ {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 Extraction",                                  r:"Green",     S:"2026-04-10",E:"2026-04-11",st:"35% complete — on track",rm:"",p:35},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 Non-GIS & Reconciliation",                    r:"Not started",S:"2026-04-11",E:"2026-04-16",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 GIS & Reconciliation",                        r:"Green",     S:"2026-04-11",E:"2026-04-17",st:"16% complete — on track",rm:"",p:16},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Extraction & Restoration",                   r:"Not started",S:"2026-04-22",E:"2026-04-23",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Non-GIS Migration",                          r:"Not started",S:"2026-04-23",E:"2026-04-25",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: GIS Migration",                              r:"Not started",S:"2026-04-23",E:"2026-04-26",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Additional Attributes",                      r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Inflight EO RPA",                            r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE1 Extraction – Incidents & catchup",           r:"Not started",S:"2026-04-25",E:"2026-04-26",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Incident Migration",                             r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Inflight SO & CE1 Order Catchup",            r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE2 Extraction – Catchup Orders",                r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE2 Order Catchup for Sun/Mon",                  r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Manual Incidents",                               r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE3 Extraction – Catchup Orders Tue",            r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE3 Order Catchup for Tue",                      r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Go No Go meeting – Checkpoint PONR",             r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",rm:"Critical Decision Gate",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Post RL switch – Go-Live",                       r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"FINAL MILESTONE",p:0},
 ];
 
-const TODAY=new Date("2026-04-08"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
+// Category-level pct calculation — Training uses only EUT row
+function catPct(menu){
+  if(menu==="Training"){
+    const eutTasks=tasks.filter(t=>t.m===menu&&!t.excludeFromTrainingPct);
+    if(!eutTasks.length)return 0;
+    return Math.round(eutTasks.reduce((a,t)=>a+t.p,0)/eutTasks.length);
+  }
+  const ts=tasks.filter(t=>t.m===menu);
+  return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
+}
+function subPct(menu,sub){
+  let ts=tasks.filter(t=>t.m===menu&&t.s===sub);
+  if(menu==="Training") ts=ts.filter(t=>!t.excludeFromTrainingPct);
+  return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
+}
+
+const TODAY=new Date("2026-04-10"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
 const GD=Math.ceil((GE-GS)/86400000);
 
 function x2p(s){const d=new Date(s);return Math.max(0,Math.min(100,(d-GS)/(GE-GS)*100))}
@@ -398,7 +436,17 @@ function rbadge(r){
   return`<span class="rag ${c}">● ${r}</span>`
 }
 function fd(s){if(!s)return"—";const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString("en-SG",{day:"2-digit",month:"short",year:"numeric"})}
-function tp(t){return t.p!==undefined?t.p:t.r==="Completed"?100:t.r==="Green"?50:t.r==="Amber"?20:0}
+
+// Green gradient for %
+function pctGrad(pct){
+  return pct>=80?"linear-gradient(90deg,#66bb6a,#2e7d32)":
+         pct>=50?"linear-gradient(90deg,#aed581,#66bb6a)":
+         pct>=20?"linear-gradient(90deg,#dce775,#aed581)":
+                 "linear-gradient(90deg,#f0f4c3,#dce775)";
+}
+function pctCol(pct){
+  return pct>=80?"#2e7d32":pct>=50?"#558b2f":pct>=20?"#827717":"#9e9d24";
+}
 
 function grp(){
   const g={};
@@ -406,27 +454,30 @@ function grp(){
   return g;
 }
 
-// ── TAB SWITCH ──
 function sw(i){
   document.querySelectorAll(".pane").forEach((p,j)=>p.classList.toggle("on",j===i));
   document.querySelectorAll(".tab").forEach((b,j)=>b.classList.toggle("on",j===i));
 }
 
-// ── GANTT DATE HEADER ──
+// ── DATE HEADER — every cell gets its day number ──
 function buildDates(){
   const cur=new Date(GS);let h="";
   while(cur<=GE){
     const iw=cur.getDay()===0||cur.getDay()===6;
     const im=cur.getDate()===1;
-    const is7=cur.getDate()%7===0;
-    const lbl=im?cur.toLocaleDateString("en-SG",{day:"numeric",month:"short"}):is7?cur.getDate():"";
-    h+=`<div class="g-dtick${im?" ms":iw?" we":""}">${lbl}</div>`;
+    const lbl=im
+      ?cur.toLocaleDateString("en-SG",{day:"numeric",month:"short"})
+      :String(cur.getDate());
+    const cls=im?" ms":iw?" we":"";
+    h+=`<div class="g-dtick${cls}">${lbl}</div>`;
     cur.setDate(cur.getDate()+1);
   }
   return h;
 }
 
-// ── TAB 0: GANTT ──
+// ════════════════════════════════
+// TAB 0 — GANTT (collapsed by default)
+// ════════════════════════════════
 function buildGantt(){
   const todayX=x2p(TODAY.toISOString().slice(0,10));
   const groups=grp();
@@ -434,34 +485,33 @@ function buildGantt(){
 
   let h=`<div class="g-hdr">
     <div class="g-hdr-lbl">Task / Activity</div>
-    <div class="g-hdr-dates">${buildDates()}<div class="today-lbl" style="left:${todayX}%">TODAY</div></div>
+    <div class="g-hdr-dates">${buildDates()}
+      <div class="today-lbl" style="left:${todayX}%">TODAY</div>
+    </div>
   </div><div class="g-body">`;
 
   Object.entries(groups).forEach(([menu,subs],mi)=>{
-    const all=Object.values(subs).flat();
-    const tot=all.length,done=all.filter(t=>t.r==="Completed").length;
-    const sump=all.reduce((a,t)=>a+tp(t),0);
-    const pct=Math.round(sump/tot);
+    const pct=catPct(menu);
     const col=mCols[menu]||"#0d5cb8";
-    const pc=pct>=80?"#2e7d32":pct>=50?"#e65100":"#c62828";
+    const pc=pctCol(pct);
 
+    // Group row — default COLLAPSED (no 'op' class on chevron, children hidden)
     h+=`<div class="g-grp" onclick="tgGrp('gm${mi}','gmc${mi}')">
       <div class="g-grp-lbl" style="border-left:3px solid ${col}">
-        <span class="g-chevron op" id="gmc${mi}">▶</span>${menu}
-        <span class="g-grp-pct" style="color:${pc}">${pct}%</span>
+        <span class="g-chev" id="gmc${mi}">▶</span>${menu}
+        <span class="g-grp-pct" style="color:${pc};background:${pctGrad(pct)};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${pct}%</span>
       </div>
       <div class="g-bar-area"><div class="today-line" style="left:${todayX}%"></div></div>
     </div>
-    <div id="gm${mi}">`;
+    <div id="gm${mi}" style="display:none">`;  // COLLAPSED by default
 
     Object.entries(subs).forEach(([sub,ts],si)=>{
-      const st=ts.length;
-      const sp=Math.round(ts.reduce((a,t)=>a+tp(t),0)/st);
-      const spc=sp>=80?"#2e7d32":sp>=50?"#e65100":"#c62828";
+      const sp=subPct(menu,sub);
+      const spc=pctCol(sp);
 
       h+=`<div class="g-sub" onclick="tgSub('gs${mi}_${si}','gsc${mi}_${si}')">
         <div class="g-sub-lbl">
-          <span class="g-chevron op" id="gsc${mi}_${si}">▶</span>${sub}
+          <span class="g-chev op" id="gsc${mi}_${si}">▶</span>${sub}
           <span class="g-sub-pct" style="color:${spc}">${sp}%</span>
         </div>
         <div class="g-bar-area"><div class="today-line" style="left:${todayX}%"></div></div>
@@ -470,9 +520,10 @@ function buildGantt(){
 
       ts.forEach(t=>{
         const bx=x2p(t.S),bw=w2p(t.S,t.E),cls=rcls(t.r);
-        const enc=encodeURIComponent(JSON.stringify({a:t.a,S:t.S,E:t.E,r:t.r,st:t.st,rm:t.rm,p:tp(t)}));
+        const isDone=t.r==="Completed";
+        const enc=encodeURIComponent(JSON.stringify({a:t.a,S:t.S,E:t.E,r:t.r,st:t.st,rm:t.rm,p:t.p}));
         h+=`<div class="g-row">
-          <div class="g-row-lbl"><span>${t.a}</span></div>
+          <div class="g-row-lbl">${isDone?'<span class="g-done-tick">✔</span>':''}<span>${t.a}</span></div>
           <div class="g-bar-area">
             <div class="today-line" style="left:${todayX}%"></div>
             <div class="g-bar ${cls}" style="left:${bx}%;width:${bw}%;top:50%;transform:translateY(-50%)"
@@ -508,7 +559,7 @@ const tipEl=document.getElementById("tip");
 function sT(e,el){
   try{
     const d=JSON.parse(decodeURIComponent(el.dataset.d));
-    const pc=d.p>=80?"var(--green)":d.p>=50?"var(--amber)":"var(--text-muted)";
+    const pc=d.p>=80?"var(--green-today)":d.p>=50?"var(--amber)":"var(--text-muted)";
     tipEl.innerHTML=`
       <div class="tip-title">${d.a}</div>
       <div class="tip-row"><span class="tip-lbl">Start</span><span class="tip-val">${fd(d.S)}</span></div>
@@ -527,20 +578,18 @@ function mT(e){
 }
 function hT(){tipEl.classList.remove("on")}
 
-// ── TAB 1: OPS DASHBOARD ──
+// ════════════════════════════════
+// TAB 1 — OPERATIONAL DASHBOARD
+// ════════════════════════════════
 function buildOps(){
   const groups=grp();
   const mCols={Training:"#0d5cb8",Comms:"#2e7d32","Prod Env Setup":"#e65100","Data Migration":"#6a1e9e"};
   let h="";
 
   Object.entries(groups).forEach(([menu,subs],mi)=>{
-    const all=Object.values(subs).flat();
-    const tot=all.length;
-    const sump=all.reduce((a,t)=>a+tp(t),0);
-    const pct=Math.round(sump/tot);
+    const pct=catPct(menu);
     const col=mCols[menu]||"#0d5cb8";
-    const grad=pct>=80?"linear-gradient(90deg,#66bb6a,#2e7d32)":pct>=50?"linear-gradient(90deg,#aed581,#66bb6a)":"linear-gradient(90deg,#e6ee9c,#aed581)";
-    const pc=pct>=80?"#2e7d32":pct>=50?"#558b2f":"#827717";
+    const tot=tasks.filter(t=>t.m===menu).length;
 
     h+=`<div>
       <div class="ops-key" onclick="tog('om${mi}','oc${mi}')">
@@ -550,43 +599,37 @@ function buildOps(){
           <span style="font-size:11px;color:var(--text-muted);margin-left:4px">(${tot} tasks)</span>
         </div>
         <div class="ops-pw">
-          <div class="ops-pb"><div class="ops-pf" style="width:${pct}%;background:${grad}"></div></div>
-          <span class="ops-pp" style="color:${pc}">${pct}%</span>
+          <div class="ops-pb"><div class="ops-pf" style="width:${pct}%;background:${pctGrad(pct)}"></div></div>
+          <span class="ops-pp" style="color:${pctCol(pct)}">${pct}%</span>
           <span class="ops-chev" id="oc${mi}">▼</span>
         </div>
       </div>
       <div class="ops-sm" id="om${mi}">`;
 
     Object.entries(subs).forEach(([sub,ts],si)=>{
-      const st2=ts.length;
-      const sp=Math.round(ts.reduce((a,t)=>a+tp(t),0)/st2);
-      const sg=sp>=80?"linear-gradient(90deg,#66bb6a,#2e7d32)":sp>=50?"linear-gradient(90deg,#aed581,#66bb6a)":"linear-gradient(90deg,#e6ee9c,#aed581)";
-      const spc=sp>=80?"#2e7d32":sp>=50?"#558b2f":"#827717";
+      const sp=subPct(menu,sub);
       const sid=`os${mi}_${si}`;
-
       h+=`<div>
         <div class="ops-sk" onclick="tog('${sid}','${sid}c')">
           <span class="ops-sk-lbl">▸ ${sub}</span>
           <div class="ops-pw">
-            <div class="ops-pb"><div class="ops-pf" style="width:${sp}%;background:${sg}"></div></div>
-            <span class="ops-pp" style="color:${spc}">${sp}%</span>
+            <div class="ops-pb"><div class="ops-pf" style="width:${sp}%;background:${pctGrad(sp)}"></div></div>
+            <span class="ops-pp" style="color:${pctCol(sp)}">${sp}%</span>
             <span class="ops-chev" id="${sid}c">▼</span>
           </div>
         </div>
         <div class="ops-act" id="${sid}">
           <table class="ops-tbl">
-            <thead><tr><th>Activity</th><th>RAG</th><th>Start</th><th>End</th><th>Status</th><th>Remarks</th></tr></thead>
+            <thead><tr><th>Activity</th><th>RAG</th><th>Start</th><th>End</th><th>Status / %</th><th>Remarks</th></tr></thead>
             <tbody>`;
-
       ts.forEach(t=>{
-        const tpct=tp(t);
-        const tstr=tpct>0&&t.r!=="Completed"?` <span style="font-family:var(--font-m);font-weight:700;color:var(--green)">(${tpct}%)</span>`:"";
+        const pstr=t.p>0&&t.r!=="Completed"?` <span style="font-family:var(--font-m);font-weight:700;color:${pctCol(t.p)}">(${t.p}%)</span>`:"";
         h+=`<tr>
-          <td>${t.a}</td>
+          <td>${t.r==="Completed"?'<span style="color:#1565c0;margin-right:4px">✔</span>':''}${t.a}</td>
           <td>${rbadge(t.r)}</td>
           <td class="dc">${fd(t.S)}</td>
           <td class="dc">${fd(t.E)}</td>
-          <td class="sc">${t.st||""}${tstr}</td>
+          <td class="sc">${t.st||""}${pstr}</td>
           <td class="rc">${t.rm||""}</td>
         </tr>`;
       });
@@ -605,42 +648,51 @@ function tog(id,cid){
   if(ch)ch.classList.toggle("op");
 }
 
-// ── TAB 2: EXEC ──
+// ════════════════════════════════
+// TAB 2 — EXECUTIVE DASHBOARD
+// ════════════════════════════════
 function buildExec(){
-  const tot=tasks.length;
-  const comp=tasks.filter(t=>t.r==="Completed").length;
-  const ar=tasks.filter(t=>t.r==="Amber").length;
-  const sump=tasks.reduce((a,t)=>a+tp(t),0);
-  const pct=Math.round(sump/tot);
-  const ambers=tasks.filter(t=>t.r==="Amber");
-  const upcoming=tasks.filter(t=>{const d=new Date(t.S);return d>TODAY&&d<=new Date("2026-04-22")&&t.r!=="Completed";})
+  const trainPct=catPct("Training");
+  const commsPct=catPct("Comms");
+  const prodPct =catPct("Prod Env Setup");
+  const migPct  =catPct("Data Migration");
+
+  // Overall = avg of all tasks (including SAKT for overall picture)
+  const allPct=Math.round(tasks.reduce((a,t)=>a+t.p,0)/tasks.length);
+  const ambTasks=tasks.filter(t=>t.r==="Amber");
+  const upcoming=tasks
+    .filter(t=>{const d=new Date(t.S);return d>TODAY&&d<=new Date("2026-04-22")&&t.r!=="Completed";})
     .sort((a,b)=>new Date(a.S)-new Date(b.S)).slice(0,8);
 
-  const cats=["Training","Comms","Prod Env Setup","Data Migration"];
-  const cc={Training:"#0d5cb8",Comms:"#2e7d32","Prod Env Setup":"#e65100","Data Migration":"#6a1e9e"};
+  // Rings — Prod Env Setup uses BLUE, others use category color
+  const cats=[
+    {name:"Training",     pct:trainPct, col:"#0d5cb8"},
+    {name:"Comms",        pct:commsPct, col:"#2e7d32"},
+    {name:"Prod Env Setup",pct:prodPct, col:"#1565c0"}, // BLUE as requested
+    {name:"Data Migration",pct:migPct, col:"#6a1e9e"},
+  ];
+  const totTasks=tasks.length;
+  const doneTasks=tasks.filter(t=>t.p===100).length;
 
   let hH=`<div class="h-grid">`;
-  cats.forEach(cat=>{
-    const ct=tasks.filter(t=>t.m===cat);
-    const sp=Math.round(ct.reduce((a,t)=>a+tp(t),0)/ct.length);
-    const col=cc[cat]||"#0d5cb8";
+  cats.forEach(c=>{
     const r=28,circ=2*Math.PI*r;
     hH+=`<div class="h-card">
-      <div class="h-lbl">${cat}</div>
+      <div class="h-lbl">${c.name}</div>
       <div class="h-ring">
         <svg width="68" height="68" viewBox="0 0 68 68">
           <circle cx="34" cy="34" r="${r}" fill="none" stroke="#e0e8f0" stroke-width="6"/>
-          <circle cx="34" cy="34" r="${r}" fill="none" stroke="${col}" stroke-width="6"
-            stroke-dasharray="${circ*sp/100} ${circ}" stroke-linecap="round"/>
+          <circle cx="34" cy="34" r="${r}" fill="none" stroke="${c.col}" stroke-width="6"
+            stroke-dasharray="${circ*c.pct/100} ${circ}" stroke-linecap="round"/>
         </svg>
-        <div class="h-ring-txt" style="color:${col}">${sp}%</div>
+        <div class="h-ring-txt" style="color:${c.col}">${c.pct}%</div>
       </div>
-      <div style="font-size:11px;color:var(--text-muted)">${ct.length} tasks</div>
+      <div style="font-size:11px;color:var(--text-muted)">${tasks.filter(t=>t.m===c.name).length} tasks</div>
     </div>`;
   });
   hH+=`</div>`;
 
-  let iH=ambers.map(t=>`<div class="iss">
+  let iH=ambTasks.map(t=>`<div class="iss">
     <div class="iss-dot"></div>
     <div>
       <div class="iss-t">${t.a}</div>
@@ -652,6 +704,7 @@ function buildExec(){
       </div>
     </div>
   </div>`).join("");
+  if(!iH) iH=`<div style="color:var(--text-muted);font-size:13px;padding:8px">No Amber items — all risk items resolved ✔</div>`;
 
   let uH=`<div class="up-grid">${upcoming.map(t=>`<div class="up-item">
     <div class="up-date">📅 ${fd(t.S)}</div>
@@ -661,30 +714,30 @@ function buildExec(){
 
   const tl=`<div class="tl">
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">13 Mar 2026</div><div class="tl-ev">RL & IMDA Comms #1 — Appointment Slots Blocking</div><div class="tl-note">Completed</div></div>
-    <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">19 Mar 2026</div><div class="tl-ev">Prod Env Setup commences — App clean-up & deployment</div><div class="tl-note">All user role matrices completed</div></div>
-    <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">30 Mar 2026</div><div class="tl-ev">Go-Live Comms #1 · Retained Systems Comms #1</div><div class="tl-note">Completed</div></div>
-    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date">8 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · ${pct}% overall completion</div><div class="tl-note">${ar} Amber item${ar!==1?"s":""} require action</div></div>
-    <div class="tl-item"><div class="tl-dot active"></div><div class="tl-date">9–10 Apr 2026</div><div class="tl-ev">E1 Extraction begins · Retained Systems Comms #2</div></div>
+    <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">19 Mar 2026</div><div class="tl-ev">Prod Env Setup commences — App clean-up & deployment</div><div class="tl-note">All app deployments and user role matrices completed</div></div>
+    <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">30 Mar – 10 Apr</div><div class="tl-ev">Go-Live Comms #1 · Retained Systems Comms #1 & #2</div><div class="tl-note">Completed</div></div>
+    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date" style="color:#2e7d32;font-weight:700">10 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · EUT at 96.1% · E1 Extraction started (35%)</div><div class="tl-note">vxField Mobile onboarding in progress · IRD verification ongoing</div></div>
+    <div class="tl-item"><div class="tl-dot active"></div><div class="tl-date">11–17 Apr 2026</div><div class="tl-ev">E1 Non-GIS Migration · E1 GIS Reconciliation · vxField verifications</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">13–17 Apr 2026</div><div class="tl-ev">Go-Live Comms #2 · EUT ILT sessions continue</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">22–28 Apr 2026</div><div class="tl-ev">E2 Migration window · Go No-Go PONR gate (28 Apr)</div><div class="tl-note">Critical decision point</div></div>
-    <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date" style="color:#c62828;font-weight:700">29 Apr 2026 — 🚀 GO-LIVE</div><div class="tl-ev" style="font-weight:700">Post RL switch — NLT System Go-Live</div><div class="tl-note">NLT Fibre Network Production Cutover</div></div>
+    <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date" style="color:#c62828;font-weight:700">29 Apr 2026 — 🚀 GO-LIVE</div><div class="tl-ev" style="font-weight:700">Post RL switch — Apollo Phase 2.0 Go-Live</div></div>
   </div>`;
 
   document.getElementById("exec").innerHTML=`
     <div class="stitle">Executive Summary — CIO / CEO / Project Director View</div>
     <div class="ex-grid">
       <div class="kpi"><div class="kpi-ico b">📊</div><div>
-        <div class="kpi-v" style="color:var(--nlt-accent)">${pct}%</div>
+        <div class="kpi-v" style="color:var(--nlt-accent)">${allPct}%</div>
         <div class="kpi-l">Overall Completion</div>
-        <div class="kpi-s">${comp} tasks done · EUT at 91.4%</div>
+        <div class="kpi-s">EUT: 96.1% · Prod Env: ${prodPct}%</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico a">⚠️</div><div>
-        <div class="kpi-v" style="color:var(--amber)">${ar}</div>
+        <div class="kpi-v" style="color:${ambTasks.length?'var(--amber)':'#2e7d32'}">${ambTasks.length}</div>
         <div class="kpi-l">At-Risk Items (Amber)</div>
-        <div class="kpi-s">vxField SSO · SVZ user verification</div>
+        <div class="kpi-s">${ambTasks.length?ambTasks.map(t=>t.a.split(' ').slice(0,2).join(' ')).join(', '):'All previous items resolved'}</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico b">⏳</div><div>
-        <div class="kpi-v" style="color:var(--nlt-dark)">21</div>
+        <div class="kpi-v" style="color:var(--nlt-dark)">19</div>
         <div class="kpi-l">Days to Go-Live</div>
         <div class="kpi-s">29 Apr 2026</div>
       </div></div>
@@ -692,20 +745,11 @@ function buildExec(){
     ${hH}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
       <div>
-        <div class="ex-sec">
-          <div class="ex-sec-t">⚠️ Items Requiring Executive Attention</div>
-          ${iH||'<div style="color:var(--text-muted);font-size:13px">No critical items</div>'}
-        </div>
-        <div class="ex-sec">
-          <div class="ex-sec-t">📅 Upcoming Tasks (Next 14 Days)</div>
-          ${uH}
-        </div>
+        <div class="ex-sec"><div class="ex-sec-t">⚠️ Items Requiring Executive Attention</div>${iH}</div>
+        <div class="ex-sec"><div class="ex-sec-t">📅 Upcoming Tasks (Next 12 Days)</div>${uH}</div>
       </div>
       <div>
-        <div class="ex-sec">
-          <div class="ex-sec-t">🗓️ Deployment Milestone Timeline</div>
-          ${tl}
-        </div>
+        <div class="ex-sec"><div class="ex-sec-t">🗓️ Deployment Milestone Timeline</div>${tl}</div>
       </div>
     </div>`;
 }
