@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apollo Phase 2.0 Deployment Dashboard — 10 Apr 2026</title>
+<title>Apollo Phase 2.0 Deployment Dashboard — 11 Apr 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -264,7 +264,7 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
     </div>
   </div>
   <div class="hdr-meta">
-    <div class="hdr-date">📅 Status: 10 Apr 2026</div>
+    <div class="hdr-date">📅 Status: 11 Apr 2026</div>
     <div class="hdr-badge">🚀 Go-Live: 29 Apr 2026</div>
   </div>
 </header>
@@ -282,7 +282,7 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:linear-gradient(90deg,#43a047,#2e7d32);display:inline-block"></span>On Track</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:linear-gradient(90deg,#fb8c00,#e65100);display:inline-block"></span>At Risk</span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:8px;border-radius:2px;background:#cfd8dc;border:1px solid #b0bec5;display:inline-block"></span>Not Started</span>
-    <span style="display:flex;align-items:center;gap:5px"><span style="width:2px;height:14px;background:var(--today-col);display:inline-block;margin:0 4px"></span><span style="color:var(--today-col);font-weight:600">Today (10 Apr)</span></span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:2px;height:14px;background:var(--today-col);display:inline-block;margin:0 4px"></span><span style="color:var(--today-col);font-weight:600">Today (11 Apr)</span></span>
     <span style="display:flex;align-items:center;gap:5px"><span style="width:20px;height:8px;border-radius:2px;background:linear-gradient(90deg,#0288d1,#01579b);display:inline-flex;align-items:center;justify-content:flex-end;padding-right:2px;"><span style="color:rgba(255,255,255,0.95);font-size:7px;font-weight:900;line-height:1;">✔</span></span>Completed task</span>
     <span style="margin-left:6px">▶ Click category / sub-menu to expand · Hover bars for details</span>
   </div>
@@ -302,111 +302,121 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 
 <script>
 // ════════════════════════════════════════
-// DATA — 10 Apr 2026
+// DATA — 11 Apr 2026
 // p = numeric completion 0-100
 // excludeSAKT flag so Training % only uses EUT
 // ════════════════════════════════════════
 const tasks=[
  // ── TRAINING ──
- {o:"Jenney",m:"Training",s:"End User Training (EUT)",        a:"End User Training (EUT)",                          r:"Green",     S:"2026-03-23",E:"2026-04-24",st:"96.1% completion rate as of 10-Apr",  rm:"EUT-SPL: 2 SOM EO & 2 GIS modules. EUT-ILT: 9 GIS modules 9-Apr–24-Apr.", p:96.1, inTraining:true},
- {o:"Jenney",m:"Training",s:"System Admin KT (SAKT)",         a:"System Administrators Knowledge Transfer (SAKT)",  r:"Not started",S:"2026-05-05",E:"2026-05-06",st:"Post-go-live. Not started",          rm:"SAKT-ILT: 3 WFM modules on 5–6 May 2026.", p:0, excludeFromTrainingPct:true},
+ {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"EUT - SPL GIS",r:"Green",S:"2026-03-23",E:"2026-04-20",st:"96% complete",rm:"2 EUT-SPL for GIS had been launched on 23-Mar-2026",p:96,inTraining:true},
+ {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"EUT - SPL SOM EO",r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",rm:"2 SOM EO modules to be launched on 20-Apr (small group)",p:0,inTraining:true},
+ {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"EUT - ILT GIS",r:"Green",S:"2026-04-09",E:"2026-04-24",st:"17% complete",rm:"9 GIS modules scheduled from 9-Apr to 24-Apr-2026",p:17,inTraining:true},
+ {o:"Jenney",m:"Training",s:"System Admin KT (SAKT)",a:"System Administrators Knowledge Transfer (SAKT)",r:"Not started",S:"2026-05-05",E:"2026-05-06",st:"Post-go-live. Not started",rm:"SAKT-ILT: 3 WFM modules on 5-6 May 2026.",p:0,excludeFromTrainingPct:true},
  // ── COMMS ──
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #1",                                         r:"Completed", S:"2026-03-30",E:"2026-04-02",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #2",                                         r:"Green",     S:"2026-04-13",E:"2026-04-17",st:"Review in progress",                  rm:"",p:30},
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Comms #3",                                         r:"Green",     S:"2026-04-27",E:"2026-05-01",st:"Dev in progress",                     rm:"",p:10},
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",         a:"Go-Live Announcement",                             r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",                        rm:"",p:0},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"SWP",                                              r:"Completed", S:"2026-04-01",E:"2026-04-10",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"NCE Portal",                                       r:"Completed", S:"2026-04-01",E:"2026-04-07",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"FRC Portal",                                       r:"Completed", S:"2026-04-01",E:"2026-04-10",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"PRP",                                              r:"Green",     S:"2026-04-01",E:"2026-04-13",st:"Planned",                             rm:"",p:50},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"Public Portal (Coverage Check)",                   r:"Green",     S:"2026-04-01",E:"2026-04-10",st:"Planned",                             rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
- {o:"P&A",m:"Comms",s:"External Portal Banner",               a:"End User Portal",                                  r:"Green",     S:"2026-04-01",E:"2026-04-10",st:"Planned",                             rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #1",                               r:"Completed", S:"2026-03-13",E:"2026-03-13",st:"Completed",                           rm:"Appointment slots blocking",p:100},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #2",                               r:"Completed", S:"2026-04-03",E:"2026-04-03",st:"Completed",                           rm:"Cutover/Switchover Calendar",p:100},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #3",                               r:"Completed", S:"2026-04-09",E:"2026-04-09",st:"Completed",                           rm:"Maintenance Window Calendar E1 & E2. Pending NLT review.",p:100},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #4",                               r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",                       rm:"Reminder on Maintenance Window Calendar E2",p:0},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #5",                               r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",                       rm:"Cutover/Switchover start at 23:00",p:0},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #6",                               r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",                       rm:"Go Ahead for Cutover/Switchover",p:0},
- {o:"P&A",m:"Comms",s:"RL & IMDA Comms",                      a:"RL & IMDA Comms #7: Go-Live",                      r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",                       rm:"",p:0},
- {o:"P&A",m:"Comms",s:"Contractors Comms",                    a:"Contractors Comms",                                r:"Green",     S:"2026-04-01",E:"2026-04-29",st:"1st comms sent 6-Apr",                rm:"Upcoming comms date alignment scheduled on 10-Apr-2026.",p:30},
- {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained System Comms #1",                         r:"Completed", S:"2026-03-30",E:"2026-03-30",st:"Completed",                           rm:"Apollo Cutover Plan",p:100},
- {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #2",                        r:"Completed", S:"2026-04-10",E:"2026-04-10",st:"Completed",                           rm:"2 weeks notice – Commencement of E1",p:100},
- {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #3",                        r:"Green",     S:"2026-04-22",E:"2026-04-22",st:"Planned",                             rm:"Commencement of E2",p:0},
- {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #4",                        r:"Green",     S:"2026-04-28",E:"2026-04-28",st:"Planned",                             rm:"Cutover/Switchover start at 23:00",p:0},
- {o:"P&A",m:"Comms",s:"Retained Systems Comms",               a:"Retained Systems Comms #5: Go-Live",               r:"Green",     S:"2026-04-29",E:"2026-04-29",st:"Planned",                             rm:"",p:0},
- {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads-up to NLT PICs on user access",              r:"Completed", S:"2026-03-25",E:"2026-03-25",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"App specific comms to NLT PICs",                   r:"Completed", S:"2026-04-01",E:"2026-04-01",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads up for E1 User Verifications",               r:"Completed", S:"2026-04-09",E:"2026-04-09",st:"Completed",                           rm:"",p:100},
- {o:"P&A",m:"Comms",s:"Deployment Team Comms",                a:"Heads up for E2 User Verifications",               r:"Green",     S:"2026-04-20",E:"2026-04-20",st:"Planned",                             rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #1",r:"Completed",S:"2026-03-30",E:"2026-04-02",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #2",r:"Green",S:"2026-04-13",E:"2026-04-17",st:"Review in progress",rm:"",p:30},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #3",r:"Green",S:"2026-04-27",E:"2026-04-27",st:"Dev in progress",rm:"",p:10},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Go-Live Announcement",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"SWP",r:"Completed",S:"2026-04-01",E:"2026-04-10",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"NCE Portal",r:"Completed",S:"2026-04-01",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"FRC Portal",r:"Completed",S:"2026-04-01",E:"2026-04-10",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"PRP",r:"Green",S:"2026-04-01",E:"2026-04-13",st:"Planned",rm:"",p:50},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"Public Portal (Coverage Check)",r:"Green",S:"2026-04-01",E:"2026-04-10",st:"Planned",rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
+ {o:"P&A",m:"Comms",s:"External Portal Banner",a:"End User Portal",r:"Green",S:"2026-04-01",E:"2026-04-10",st:"Planned",rm:"As of 10-Apr 7pm, not reflected on portal yet. Arijit to follow up with NLT.",p:50},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #1",r:"Completed",S:"2026-03-13",E:"2026-03-13",st:"Completed",rm:"Appointment slots blocking",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #2",r:"Completed",S:"2026-04-03",E:"2026-04-03",st:"Completed",rm:"Cutover/Switchover Calendar",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #3",r:"Completed",S:"2026-04-09",E:"2026-04-09",st:"Completed",rm:"Maintenance Window Calendar E1 & E2. Pending NLT review.",p:100},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #4",r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",rm:"Reminder on Maintenance Window Calendar E2",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #5",r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",rm:"Cutover/Switchover start at 23:00",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #6",r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",rm:"Go Ahead for Cutover/Switchover",p:0},
+ {o:"P&A",m:"Comms",s:"RL & IMDA Comms",a:"RL & IMDA Comms #7: Go-Live",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #1",r:"Completed",S:"2026-04-01",E:"2026-04-06",st:"Completed",rm:"Cutover plan and contractor involvement. 1st comms sent on 6-Apr-2026.",p:100},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #2",r:"Completed",S:"2026-04-02",E:"2026-04-06",st:"Completed",rm:"Heads up on onboarding. User guide for setting up account.",p:100},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #3",r:"Green",S:"2026-04-08",E:"2026-04-10",st:"Planned",rm:"Share User Setup status per contractor in CyberArk. User guide for application access check.",p:50},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #4",r:"Not started",S:"2026-04-16",E:"2026-04-20",st:"Not started",rm:"Recap Cutover plan. Activity on Tue 28-Apr 16:00-18:00 - contractor sanity test post migration.",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #5",r:"Not started",S:"2026-04-23",E:"2026-04-27",st:"Not started",rm:"Reminder about NLT ambassadors for post migration sanity test on 28-Apr 16:00-18:00.",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Activity - 28 Apr 4PM-6PM",r:"Not started",S:"2026-04-24",E:"2026-04-28",st:"Not started",rm:"Check task assignments for Patching, Installation and TT Work Orders post migration.",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #6",r:"Not started",S:"2026-04-24",E:"2026-04-28",st:"Not started",rm:"Key Contractor PICs: NLT GO decision on the night of 28-Apr 10PM.",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #7",r:"Not started",S:"2026-04-27",E:"2026-04-29",st:"Not started",rm:"Key Contractor PICs: Final Go-No-Go after RL Switchover.",p:0},
+ {o:"P&A",m:"Comms",s:"Contractors Comms",a:"Contractors Comms #8",r:"Not started",S:"2026-04-29",E:"2026-05-03",st:"Not started",rm:"Details for which work orders to progress after go-live.",p:0},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",a:"Retained System Comms #1",r:"Completed",S:"2026-03-30",E:"2026-03-30",st:"Completed",rm:"Apollo Cutover Plan",p:100},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",a:"Retained Systems Comms #2",r:"Completed",S:"2026-04-10",E:"2026-04-10",st:"Completed",rm:"2 weeks notice - Commencement of E1",p:100},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",a:"Retained Systems Comms #3",r:"Not started",S:"2026-04-22",E:"2026-04-22",st:"Planned",rm:"Commencement of E2 reminder. Bridge details / On site presence calendar.",p:0},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",a:"Retained Systems Comms #4",r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Planned",rm:"Cutover/Switchover start at 23:00",p:0},
+ {o:"P&A",m:"Comms",s:"Retained Systems Comms",a:"Retained Systems Comms #5: Go-Live",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Planned",rm:"",p:0},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",a:"Heads-up to NLT PICs on user access",r:"Completed",S:"2026-03-25",E:"2026-03-25",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",a:"App specific comms to NLT PICs",r:"Completed",S:"2026-04-01",E:"2026-04-01",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",a:"Heads up for E1 User Verifications",r:"Completed",S:"2026-04-09",E:"2026-04-09",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Comms",s:"Deployment Team Comms",a:"Heads up for E2 User Verifications",r:"Green",S:"2026-04-20",E:"2026-04-20",st:"Planned",rm:"",p:0},
  // ── PROD ENV SETUP ──
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"OSM App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"UIM App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"vxField App clean-up & deployment",               r:"Completed", S:"2026-03-19",E:"2026-04-17",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"iValua App clean-up & deployment",                r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Helix App clean-up & deployment",                 r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"IRD (plus Qlik) App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-14",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"OSB App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"B2B Gateway App clean-up & deployment",           r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"SWP App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Internal Portal App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"External Portal App clean-up & deployment",       r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"BRE App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"DMS App clean-up & deployment",                   r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"SVZ App clean-up & deployment",                   r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"AWS SFTP App clean-up & deployment",              r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",   a:"Splunk App clean-up & deployment",                r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSM User role matrix confirmation",              r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"UIM User role matrix confirmation",              r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"vxField User role matrix confirmation",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"iValua User role matrix confirmation",           r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Helix User role matrix confirmation",            r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"IRD (plus Qlik) User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSB User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"B2B Gateway User role matrix confirmation",     r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SWP User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Internal Portal User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"External Portal User role matrix confirmation", r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"BRE User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"DMS User role matrix confirmation",             r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SVZ User role matrix confirmation",             r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"AWS SFTP User role matrix confirmation",        r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Splunk User role matrix confirmation",          r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"OSM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"UIM App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 2 pending user to test after Go-live",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Web user verification",                  r:"Green",     S:"2026-03-19",E:"2026-04-13",st:"96% complete",rm:"Requested 4 pending users to close testing by Mon 13-Apr",p:96},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"vxField Mobile App user verification",           r:"Amber",S:"2026-04-10",E:"2026-04-17",st:"0% — SSO resolved; date revised to 17-Apr",rm:"Accruent Mobile App SSO login issue resolved, 294 contractor onboarding to CyberArk completed. Date has been revised to 17-Apr",p:0},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"iValua App user verification",                   r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Helix App user verification",                    r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"IRD (plus Qlik) App user verification",          r:"Green",     S:"2026-03-19",E:"2026-04-14",st:"30% complete",rm:"User configuration completed, verification in progress",p:30},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"OSB App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"B2B Gateway App user verification",              r:"Completed", S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"SWP App user verification",                      r:"Green",     S:"2026-03-19",E:"2026-04-17",st:"91% complete",rm:"NLT user verification completed, RL testing in progress",p:91},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Internal Portal App user verification",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"External Portal App user verification",          r:"Completed", S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"BRE App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"DMS App user verification",                      r:"Completed", S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"SVZ App user verification",                      r:"Completed", S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, pending user to test after Go-live",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"AWS SFTP App user verification",                 r:"Completed", S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Prod Env Setup",s:"App user verification",       a:"Splunk App user verification",                   r:"Completed", S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"OSM App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"UIM App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"vxField App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-17",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"iValua App clean-up & deployment",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"Helix App clean-up & deployment",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"IRD (plus Qlik) App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-14",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"OSB App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"B2B Gateway App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"SWP App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"Internal Portal App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"External Portal App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"BRE App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"DMS App clean-up & deployment",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"SVZ App clean-up & deployment",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"AWS SFTP App clean-up & deployment",r:"Completed",S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App clean-up & deployment",a:"Splunk App clean-up & deployment",r:"Completed",S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSM User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"UIM User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"vxField User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"iValua User role matrix confirmation",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Helix User role matrix confirmation",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"IRD (plus Qlik) User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"OSB User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"B2B Gateway User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SWP User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Internal Portal User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"External Portal User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"BRE User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"DMS User role matrix confirmation",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"SVZ User role matrix confirmation",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"AWS SFTP User role matrix confirmation",r:"Completed",S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"User role matrix confirmation",a:"Splunk User role matrix confirmation",r:"Completed",S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"OSM App user verification",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"UIM App user verification",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 2 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"vxField Web user verification",r:"Green",S:"2026-03-19",E:"2026-04-13",st:"96% complete",rm:"Requested 4 pending users to close testing by Mon 13-Apr. Planned completion date revised to 13-Apr.",p:96},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"vxField Mobile App user verification",r:"Amber",S:"2026-04-10",E:"2026-04-17",st:"0% - SSO resolved; MDM push pending",rm:"Accruent Mobile App SSO login issue resolved. Contractor FE onboarding to CyberArk completed. Pending push of application via MDM. Planned completion revised to 17-Apr.",p:0},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"iValua App user verification",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"Helix App user verification",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"IRD (plus Qlik) App user verification",r:"Green",S:"2026-03-19",E:"2026-04-13",st:"30% complete",rm:"User configuration completed. Verification in progress. Planned completion date revised to 13-Apr.",p:30},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"OSB App user verification",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"B2B Gateway App user verification",r:"Completed",S:"2026-03-19",E:"2026-03-31",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"SWP App user verification",r:"Green",S:"2026-03-19",E:"2026-04-17",st:"91% complete",rm:"NLT user verification completed. RL testing in progress. Planned completion date revised to 17-Apr.",p:91},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"Internal Portal App user verification",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"User verification closed, 1 pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"External Portal App user verification",r:"Completed",S:"2026-03-19",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"BRE App user verification",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"DMS App user verification",r:"Completed",S:"2026-03-19",E:"2026-03-30",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"SVZ App user verification",r:"Completed",S:"2026-03-23",E:"2026-04-07",st:"Completed",rm:"User verification closed, pending user to test after Go-live",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"AWS SFTP App user verification",r:"Completed",S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
+ {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"Splunk App user verification",r:"Completed",S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
  // ── DATA MIGRATION ──
- {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 Extraction",                                  r:"Green",     S:"2026-04-10",E:"2026-04-11",st:"35% complete — on track",rm:"",p:35},
- {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 Non-GIS & Reconciliation",                    r:"Not started",S:"2026-04-11",E:"2026-04-16",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E1 migration",               a:"E1 GIS & Reconciliation",                        r:"Green",     S:"2026-04-11",E:"2026-04-17",st:"16% complete — on track",rm:"",p:16},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Extraction & Restoration",                   r:"Not started",S:"2026-04-22",E:"2026-04-23",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Non-GIS Migration",                          r:"Not started",S:"2026-04-23",E:"2026-04-25",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: GIS Migration",                              r:"Not started",S:"2026-04-23",E:"2026-04-26",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Additional Attributes",                      r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Inflight EO RPA",                            r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE1 Extraction – Incidents & catchup",           r:"Not started",S:"2026-04-25",E:"2026-04-26",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Incident Migration",                             r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"E2: Inflight SO & CE1 Order Catchup",            r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE2 Extraction – Catchup Orders",                r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE2 Order Catchup for Sun/Mon",                  r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Manual Incidents",                               r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE3 Extraction – Catchup Orders Tue",            r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"CE3 Order Catchup for Tue",                      r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Go No Go meeting – Checkpoint PONR",             r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",rm:"Critical Decision Gate",p:0},
- {o:"Inam",m:"Data Migration",s:"E2 migration",               a:"Post RL switch – Go-Live",                       r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"FINAL MILESTONE",p:0},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Extraction",r:"Green",S:"2026-04-10",E:"2026-04-12",st:"96% complete - on track",rm:"on track",p:96},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Non-GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-16",st:"17% complete - on track",rm:"on track",p:17},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-17",st:"93% complete - on track",rm:"on track",p:93},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Extraction & Restoration",r:"Not started",S:"2026-04-22",E:"2026-04-23",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Non-GIS Migration",r:"Not started",S:"2026-04-23",E:"2026-04-25",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: GIS Migration",r:"Not started",S:"2026-04-23",E:"2026-04-26",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Additional Attributes",r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Inflight EO RPA",r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"CE1 Extraction - Incidents & catchup",r:"Not started",S:"2026-04-25",E:"2026-04-26",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"Incident Migration",r:"Not started",S:"2026-04-26",E:"2026-04-27",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Inflight SO & CE1 Order Catchup",r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"CE2 Extraction - Catchup Orders",r:"Not started",S:"2026-04-27",E:"2026-04-28",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"CE2 Order Catchup for Sun/Mon",r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"Manual Incidents",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"CE3 Extraction - Catchup Orders Tue",r:"Not started",S:"2026-04-28",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"CE3 Order Catchup for Tue",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"Go No Go meeting - Checkpoint PONR",r:"Not started",S:"2026-04-28",E:"2026-04-28",st:"Not started",rm:"Critical Decision Gate",p:0},
+ {o:"Inam",m:"Data Migration",s:"E2 migration",a:"Post RL switch - Go-Live",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"FINAL MILESTONE",p:0},
 ];
 
 // Category-level pct calculation — Training uses only EUT row
@@ -414,18 +424,39 @@ function catPct(menu){
   if(menu==="Training"){
     const eutTasks=tasks.filter(t=>t.m===menu&&!t.excludeFromTrainingPct);
     if(!eutTasks.length)return 0;
-    return Math.round(eutTasks.reduce((a,t)=>a+t.p,0)/eutTasks.length);
+    // Weighted: EUT - SPL GIS = 80%, EUT - SPL SOM EO = 10%, EUT - ILT GIS = 10%
+    const weights={"EUT - SPL GIS":0.8,"EUT - SPL SOM EO":0.1,"EUT - ILT GIS":0.1};
+    let weighted=0, totalW=0;
+    eutTasks.forEach(t=>{
+      const w=weights[t.a]!==undefined?weights[t.a]:0;
+      weighted+=t.p*w;
+      totalW+=w;
+    });
+    return totalW>0?Math.round(weighted/totalW):Math.round(eutTasks.reduce((a,t)=>a+t.p,0)/eutTasks.length);
   }
   const ts=tasks.filter(t=>t.m===menu);
   return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
 }
+
 function subPct(menu,sub){
   let ts=tasks.filter(t=>t.m===menu&&t.s===sub);
   if(menu==="Training") ts=ts.filter(t=>!t.excludeFromTrainingPct);
+  if(!ts.length)return 0;
+  if(menu==="Training"&&sub==="End User Training (EUT)"){
+    // Weighted: EUT - SPL GIS = 80%, EUT - SPL SOM EO = 10%, EUT - ILT GIS = 10%
+    const weights={"EUT - SPL GIS":0.8,"EUT - SPL SOM EO":0.1,"EUT - ILT GIS":0.1};
+    let weighted=0, totalW=0;
+    ts.forEach(t=>{
+      const w=weights[t.a]!==undefined?weights[t.a]:0;
+      weighted+=t.p*w;
+      totalW+=w;
+    });
+    return totalW>0?Math.round(weighted/totalW):Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length);
+  }
   return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
 }
 
-const TODAY=new Date("2026-04-10"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
+const TODAY=new Date("2026-04-11"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
 const GD=Math.ceil((GE-GS)/86400000);
 
 function x2p(s){const d=new Date(s);return Math.max(0,Math.min(100,(d-GS)/(GE-GS)*100))}
@@ -716,7 +747,7 @@ function buildExec(){
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">13 Mar 2026</div><div class="tl-ev">RL & IMDA Comms #1 — Appointment Slots Blocking</div><div class="tl-note">Completed</div></div>
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">19 Mar 2026</div><div class="tl-ev">Prod Env Setup commences — App clean-up & deployment</div><div class="tl-note">All app deployments and user role matrices completed</div></div>
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">30 Mar – 10 Apr</div><div class="tl-ev">Go-Live Comms #1 · Retained Systems Comms #1 & #2</div><div class="tl-note">Completed</div></div>
-    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date" style="color:#2e7d32;font-weight:700">10 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · EUT at 96.1% · E1 Extraction started (35%)</div><div class="tl-note">vxField Mobile onboarding in progress · IRD verification ongoing</div></div>
+    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date" style="color:#2e7d32;font-weight:700">11 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · E1 Extraction 96% · E1 GIS 93% · E1 Non-GIS 17%</div><div class="tl-note">vxField Mobile MDM push pending · IRD verification 30% in progress</div></div>
     <div class="tl-item"><div class="tl-dot active"></div><div class="tl-date">11–17 Apr 2026</div><div class="tl-ev">E1 Non-GIS Migration · E1 GIS Reconciliation · vxField verifications</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">13–17 Apr 2026</div><div class="tl-ev">Go-Live Comms #2 · EUT ILT sessions continue</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">22–28 Apr 2026</div><div class="tl-ev">E2 Migration window · Go No-Go PONR gate (28 Apr)</div><div class="tl-note">Critical decision point</div></div>
@@ -729,7 +760,7 @@ function buildExec(){
       <div class="kpi"><div class="kpi-ico b">📊</div><div>
         <div class="kpi-v" style="color:var(--nlt-accent)">${allPct}%</div>
         <div class="kpi-l">Overall Completion</div>
-        <div class="kpi-s">EUT: 96.1% · Prod Env: ${prodPct}%</div>
+        <div class="kpi-s">EUT: 79% · Prod Env: ${prodPct}%</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico a">⚠️</div><div>
         <div class="kpi-v" style="color:${ambTasks.length?'var(--amber)':'#2e7d32'}">${ambTasks.length}</div>
