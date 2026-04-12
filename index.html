@@ -424,32 +424,29 @@ function catPct(menu){
   if(menu==="Training"){
     const eutTasks=tasks.filter(t=>t.m===menu&&!t.excludeFromTrainingPct);
     if(!eutTasks.length)return 0;
-    // Weighted: EUT - SPL GIS = 80%, EUT - SPL SOM EO = 10%, EUT - ILT GIS = 10%
-    const weights={"EUT - SPL GIS":0.8,"EUT - SPL SOM EO":0.1,"EUT - ILT GIS":0.1};
-    let weighted=0, totalW=0;
+    // Weighted: EUT - SPL GIS = 95%, EUT - SPL SOM EO = 2.5%, EUT - ILT GIS = 2.5%
+    const weights={"EUT - SPL GIS":0.95,"EUT - SPL SOM EO":0.025,"EUT - ILT GIS":0.025};
+    let weighted=0,totalW=0;
     eutTasks.forEach(t=>{
       const w=weights[t.a]!==undefined?weights[t.a]:0;
-      weighted+=t.p*w;
-      totalW+=w;
+      weighted+=t.p*w; totalW+=w;
     });
     return totalW>0?Math.round(weighted/totalW):Math.round(eutTasks.reduce((a,t)=>a+t.p,0)/eutTasks.length);
   }
   const ts=tasks.filter(t=>t.m===menu);
   return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
 }
-
 function subPct(menu,sub){
   let ts=tasks.filter(t=>t.m===menu&&t.s===sub);
   if(menu==="Training") ts=ts.filter(t=>!t.excludeFromTrainingPct);
   if(!ts.length)return 0;
   if(menu==="Training"&&sub==="End User Training (EUT)"){
-    // Weighted: EUT - SPL GIS = 80%, EUT - SPL SOM EO = 10%, EUT - ILT GIS = 10%
-    const weights={"EUT - SPL GIS":0.8,"EUT - SPL SOM EO":0.1,"EUT - ILT GIS":0.1};
-    let weighted=0, totalW=0;
+    // Weighted: EUT - SPL GIS = 95%, EUT - SPL SOM EO = 2.5%, EUT - ILT GIS = 2.5%
+    const weights={"EUT - SPL GIS":0.95,"EUT - SPL SOM EO":0.025,"EUT - ILT GIS":0.025};
+    let weighted=0,totalW=0;
     ts.forEach(t=>{
       const w=weights[t.a]!==undefined?weights[t.a]:0;
-      weighted+=t.p*w;
-      totalW+=w;
+      weighted+=t.p*w; totalW+=w;
     });
     return totalW>0?Math.round(weighted/totalW):Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length);
   }
@@ -689,7 +686,8 @@ function buildExec(){
   const migPct  =catPct("Data Migration");
 
   // Overall = avg of all tasks (including SAKT for overall picture)
-  const allPct=Math.round(tasks.reduce((a,t)=>a+t.p,0)/tasks.length);
+  // Overall weighted: Training 20%, Prod Env Setup 40%, Data Migration 30%, Comms 10%
+  const allPct=Math.round(0.20*catPct("Training")+0.40*catPct("Prod Env Setup")+0.30*catPct("Data Migration")+0.10*catPct("Comms"));
   const ambTasks=tasks.filter(t=>t.r==="Amber");
   const upcoming=tasks
     .filter(t=>{const d=new Date(t.S);return d>TODAY&&d<=new Date("2026-04-22")&&t.r!=="Completed";})
@@ -760,7 +758,7 @@ function buildExec(){
       <div class="kpi"><div class="kpi-ico b">📊</div><div>
         <div class="kpi-v" style="color:var(--nlt-accent)">${allPct}%</div>
         <div class="kpi-l">Overall Completion</div>
-        <div class="kpi-s">EUT: 79% · Prod Env: ${prodPct}%</div>
+        <div class="kpi-s">EUT: 92% · Prod Env: ${prodPct}%</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico a">⚠️</div><div>
         <div class="kpi-v" style="color:${ambTasks.length?'var(--amber)':'#2e7d32'}">${ambTasks.length}</div>
@@ -768,7 +766,7 @@ function buildExec(){
         <div class="kpi-s">${ambTasks.length?ambTasks.map(t=>t.a.split(' ').slice(0,2).join(' ')).join(', '):'All previous items resolved'}</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico b">⏳</div><div>
-        <div class="kpi-v" style="color:var(--nlt-dark)">19</div>
+        <div class="kpi-v" style="color:var(--nlt-dark)">18</div>
         <div class="kpi-l">Days to Go-Live</div>
         <div class="kpi-s">29 Apr 2026</div>
       </div></div>
