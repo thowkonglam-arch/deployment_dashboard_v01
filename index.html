@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apollo Phase 2.0 Deployment Dashboard — 11 Apr 2026</title>
+<title>Apollo Phase 2.0 Deployment Dashboard — 12 Apr 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -264,7 +264,7 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
     </div>
   </div>
   <div class="hdr-meta">
-    <div class="hdr-date">📅 Status: 11 Apr 2026</div>
+    <div class="hdr-date">📅 Status: 12 Apr 2026</div>
     <div class="hdr-badge">🚀 Go-Live: 29 Apr 2026</div>
   </div>
 </header>
@@ -399,9 +399,9 @@ const tasks=[
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"AWS SFTP App user verification",r:"Completed",S:"2026-03-20",E:"2026-04-07",st:"Completed",rm:"",p:100},
  {o:"P&A",m:"Prod Env Setup",s:"App user verification",a:"Splunk App user verification",r:"Completed",S:"2026-03-20",E:"2026-03-31",st:"Completed",rm:"",p:100},
  // ── DATA MIGRATION ──
- {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Extraction",r:"Green",S:"2026-04-10",E:"2026-04-12",st:"96% complete - on track",rm:"on track",p:96},
- {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Non-GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-16",st:"17% complete - on track",rm:"on track",p:17},
- {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-17",st:"93% complete - on track",rm:"on track",p:93},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Extraction",r:"Completed",S:"2026-04-10",E:"2026-04-12",st:"Completed",rm:"Completed",p:100},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 Non-GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-16",st:"58% complete - on track",rm:"on track",p:58},
+ {o:"Inam",m:"Data Migration",s:"E1 migration",a:"E1 GIS & Reconciliation",r:"Green",S:"2026-04-11",E:"2026-04-17",st:"97% complete - on track",rm:"on track",p:97},
  {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Extraction & Restoration",r:"Not started",S:"2026-04-22",E:"2026-04-23",st:"Not started",rm:"",p:0},
  {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: Non-GIS Migration",r:"Not started",S:"2026-04-23",E:"2026-04-25",st:"Not started",rm:"",p:0},
  {o:"Inam",m:"Data Migration",s:"E2 migration",a:"E2: GIS Migration",r:"Not started",S:"2026-04-23",E:"2026-04-26",st:"Not started",rm:"",p:0},
@@ -453,7 +453,7 @@ function subPct(menu,sub){
   return ts.length?Math.round(ts.reduce((a,t)=>a+t.p,0)/ts.length):0;
 }
 
-const TODAY=new Date("2026-04-11"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
+const TODAY=new Date("2026-04-12"),GS=new Date("2026-03-10"),GE=new Date("2026-05-12");
 const GD=Math.ceil((GE-GS)/86400000);
 
 function x2p(s){const d=new Date(s);return Math.max(0,Math.min(100,(d-GS)/(GE-GS)*100))}
@@ -745,7 +745,7 @@ function buildExec(){
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">13 Mar 2026</div><div class="tl-ev">RL & IMDA Comms #1 — Appointment Slots Blocking</div><div class="tl-note">Completed</div></div>
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">19 Mar 2026</div><div class="tl-ev">Prod Env Setup commences — App clean-up & deployment</div><div class="tl-note">All app deployments and user role matrices completed</div></div>
     <div class="tl-item"><div class="tl-dot past"></div><div class="tl-date">30 Mar – 10 Apr</div><div class="tl-ev">Go-Live Comms #1 · Retained Systems Comms #1 & #2</div><div class="tl-note">Completed</div></div>
-    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date" style="color:#2e7d32;font-weight:700">11 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · E1 Extraction 96% · E1 GIS 93% · E1 Non-GIS 17%</div><div class="tl-note">vxField Mobile MDM push pending · IRD verification 30% in progress</div></div>
+    <div class="tl-item"><div class="tl-dot today"></div><div class="tl-date" style="color:#2e7d32;font-weight:700">12 Apr 2026 — TODAY</div><div class="tl-ev">Status snapshot · E1 Extraction 100% (Completed) · E1 GIS 97% · E1 Non-GIS 58%</div><div class="tl-note">vxField Mobile MDM push pending · IRD verification in progress</div></div>
     <div class="tl-item"><div class="tl-dot active"></div><div class="tl-date">11–17 Apr 2026</div><div class="tl-ev">E1 Non-GIS Migration · E1 GIS Reconciliation · vxField verifications</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">13–17 Apr 2026</div><div class="tl-ev">Go-Live Comms #2 · EUT ILT sessions continue</div></div>
     <div class="tl-item"><div class="tl-dot future"></div><div class="tl-date">22–28 Apr 2026</div><div class="tl-ev">E2 Migration window · Go No-Go PONR gate (28 Apr)</div><div class="tl-note">Critical decision point</div></div>
@@ -766,7 +766,7 @@ function buildExec(){
         <div class="kpi-s">${ambTasks.length?ambTasks.map(t=>t.a.split(' ').slice(0,2).join(' ')).join(', '):'All previous items resolved'}</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico b">⏳</div><div>
-        <div class="kpi-v" style="color:var(--nlt-dark)">18</div>
+        <div class="kpi-v" style="color:var(--nlt-dark)">17</div>
         <div class="kpi-l">Days to Go-Live</div>
         <div class="kpi-s">29 Apr 2026</div>
       </div></div>
