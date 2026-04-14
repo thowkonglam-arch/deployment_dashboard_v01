@@ -302,20 +302,20 @@ body{background:var(--bg-page);color:var(--text-pri);font-family:var(--font-b);m
 
 <script>
 // ════════════════════════════════════════
-// DATA — 11 Apr 2026
+// DATA — 13 Apr 2026
 // p = numeric completion 0-100
 // excludeSAKT flag so Training % only uses EUT
 // ════════════════════════════════════════
 const tasks=[
  // ── TRAINING ──
- {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"End User Training (EUT) - SPL GIS",r:"Green",S:"2026-03-23",E:"2026-04-20",st:"97% complete",rm:"2 EUT-SPL for GIS had been launched on 23-Mar-2026",p:97,inTraining:true},
+ {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"End User Training (EUT) - SPL GIS",r:"Green",S:"2026-03-23",E:"2026-04-20",st:"96.7% complete",rm:"2 EUT-SPL for GIS had been launched on 23-Mar-2026",p:96.685,inTraining:true},
  {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"End User Training (EUT) - SPL SOM EO",r:"Not started",S:"2026-04-20",E:"2026-04-20",st:"Not started",rm:"2 SOM EO modules to be launched on 20-Apr (small group)",p:0,inTraining:true},
  {o:"Jenney",m:"Training",s:"End User Training (EUT)",a:"End User Training (EUT) - ILT GIS",r:"Green",S:"2026-04-09",E:"2026-04-24",st:"25% complete",rm:"9 GIS modules scheduled from 9-Apr to 24-Apr-2026",p:25,inTraining:true},
  {o:"Jenney",m:"Training",s:"System Admin KT (SAKT)",a:"System Administrators Knowledge Transfer (SAKT)",r:"Not started",S:"2026-05-05",E:"2026-05-06",st:"Post-go-live. Not started",rm:"SAKT-ILT: 3 WFM modules on 5-6 May 2026.",p:0,excludeFromTrainingPct:true},
  // ── COMMS ──
  {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #1",r:"Completed",S:"2026-03-30",E:"2026-04-02",st:"Completed",rm:"",p:100},
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #2",r:"Green",S:"2026-04-13",E:"2026-04-17",st:"Review in progress",rm:"",p:30},
- {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #3",r:"Green",S:"2026-04-27",E:"2026-04-27",st:"Dev in progress",rm:"",p:10},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #2",r:"Green",S:"2026-04-13",E:"2026-04-17",st:"85% - Review in progress",rm:"",p:85},
+ {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Comms #3",r:"Green",S:"2026-04-27",E:"2026-04-27",st:"30% - Dev in progress",rm:"",p:30},
  {o:"P&A",m:"Comms",s:"Go-Live Comms (NLT Org-Wide)",a:"Go-Live Announcement",r:"Not started",S:"2026-04-29",E:"2026-04-29",st:"Not started",rm:"",p:0},
  {o:"P&A",m:"Comms",s:"External Portal Banner",a:"SWP",r:"Completed",S:"2026-04-01",E:"2026-04-10",st:"Completed",rm:"",p:100},
  {o:"P&A",m:"Comms",s:"External Portal Banner",a:"NCE Portal",r:"Completed",S:"2026-04-01",E:"2026-04-07",st:"Completed",rm:"",p:100},
@@ -757,7 +757,7 @@ function buildExec(){
       <div class="kpi"><div class="kpi-ico b">📊</div><div>
         <div class="kpi-v" style="color:var(--nlt-accent)">${allPct}%</div>
         <div class="kpi-l">Overall Completion</div>
-        <div class="kpi-s">EUT: 93% · Prod Env: ${prodPct}%</div>
+        <div class="kpi-s">EUT: 92% · Prod Env: ${prodPct}%</div>
       </div></div>
       <div class="kpi"><div class="kpi-ico a">⚠️</div><div>
         <div class="kpi-v" style="color:${ambTasks.length?'var(--amber)':'#2e7d32'}">${ambTasks.length}</div>
